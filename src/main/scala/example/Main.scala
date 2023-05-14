@@ -21,7 +21,7 @@ object Main {
         className := "bg-gradient-to-b from-[#7643FF] to-[#2E2CE9]",
         p(
           "Your Result",
-          className := "text-[#D4CAFF] text-2xl font p-8 "
+          className := "text-[#D4CAFF] text-2xl font-semibold p-8 "
         ),
         div(
           className := "rounded-full bg-blue-900 h-56 w-56 flex flex-col justify-center items-center p-14",
@@ -39,17 +39,19 @@ object Main {
         )
       ),
       div(
-        className := "flex flex-col items-left pt-10",
-        p("Summary"),
-        results.map(renderCategoryScore(_))
+        className := "flex flex-col items-start w-full px-10",
+        p("Summary", className := "font-bold text-2xl py-8"),
+        results.map(renderCategoryScore(_)),
+        button("Continue", className := "text-white bg-blue-900 h-16 w-full rounded-full p-4")
+
       ),
-      button("Continue")
     )
   }
 
   def renderCategoryScore(result: CategoryResult): Element = {
     div(
-      className := "flex flex-row",
+      className := "px-10 flex flex-row w-full py-4",
+      className := result.backgroundColorClass,
       p(result.name),
       p(s"${result.score} / 100")
     )
