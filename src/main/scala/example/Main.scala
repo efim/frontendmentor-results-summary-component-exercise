@@ -12,6 +12,7 @@ def resultsSummaryComponent(): Unit =
 
 object Main {
   def resultsSummary(): Element = div(
+    className := "bg-blue-500 text-white",
     """  Your Result
   76
   of 100
