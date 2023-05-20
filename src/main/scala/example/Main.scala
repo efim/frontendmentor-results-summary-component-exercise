@@ -19,7 +19,8 @@ object Main {
   def resultsSummary(results: List[CategoryResult]): Element = {
     val totalScore = results.map(_.score).sum / results.size
     div(
-      className := " w-full h-full flex flex-col items-center justify-center ",
+      // TODO don't understand why h-screen results in part of header being higher than top on some narrow phones
+      className := " w-screen h-full flex flex-col items-center justify-center lg:h-screen",
       div(
         className := "flex flex-col items-center ",
         className := "lg:flex-row lg:h-[500px] lg:w-[720px] lg:place-self-center lg:shadow-custom rounded-[40px]  ",
