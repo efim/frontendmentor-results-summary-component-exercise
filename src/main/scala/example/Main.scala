@@ -31,7 +31,7 @@ object Main {
 
   def renderTotal(totalScore: Int) = {
     div(
-      className := "flex flex-col items-center w-full rounded-b-[30px] h-2/5 ",
+      className := "flex flex-col items-center w-full rounded-b-[30px] ",
       className := "lg:rounded-[30px] lg:h-full lg:w-1/2 lg:justify-center ",
       className := "bg-gradient-to-b from-[#7643FF] to-[#2E2CE9]",
       p(
@@ -61,7 +61,7 @@ object Main {
         ),
         p(
           "You scored higher than 65% of the people who have taken these tests.",
-          className := "text-[#B4B6FF] text-base font-semibold text-center pb-16 px-16 ",
+          className := "text-[#B4B6FF] text-base font-semibold text-center pb-8 px-16 ",
           className := "lg:px-14 lg:text-lg lg:font-normal"
         )
       )
