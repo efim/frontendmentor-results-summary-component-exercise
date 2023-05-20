@@ -19,13 +19,14 @@ object Main {
   def resultsSummary(results: List[CategoryResult]): Element = {
     val totalScore = results.map(_.score).sum / results.size
     div(
-      className := "h-full w-screen h-screen flex flex-row items-center justify-center ",
+      className := " w-full h-full flex flex-col items-center justify-center ",
       div(
-        className := "flex flex-col items-center h-screen",
+        className := "flex flex-col items-center ",
         className := "lg:flex-row lg:h-[500px] lg:w-[720px] lg:place-self-center lg:shadow-custom rounded-[40px]  ",
         renderTotal(totalScore),
-        renderSummary(results)
-      )
+        renderSummary(results),
+      ),
+      renderAttribution()
     )
   }
 
@@ -36,7 +37,7 @@ object Main {
       className := "bg-gradient-to-b from-[#7643FF] to-[#2E2CE9]",
       p(
         "Your Result",
-        className := "text-[#D4CAFF] text-lg font-semibold pt-10 pb-4 ",
+        className := "text-[#D4CAFF] text-lg font-semibold pt-6 pb-4 ",
         className := "lg:text-2xl lg:pb-6 "
       ),
       div(
@@ -48,14 +49,16 @@ object Main {
           className := "text-6xl font-extrabold text-white ",
           className := "lg:text-7xl lg:pb-3 "
         ),
-        p("of 100",
+        p(
+          "of 100",
           className := "text-base font-bold text-[#8a80ff] block px-10",
           className := "lg:font-bold"
         )
       ),
       div(
         className := "flex flex-col items-center",
-        p("Great",
+        p(
+          "Great",
           className := "text-white text-2xl font-bold pt-5 pb-2",
           className := "lg:text-3xl lg:p-4"
         ),
@@ -116,5 +119,20 @@ object Main {
         )
       )
     )
+  }
+
+  def renderAttribution() = {
+    div(
+      className := "attribution flex flex-row pt-1",
+      "Challenge by",
+      a(
+        href := "https://www.frontendmentor.io?ref=challenge",
+        target := "_blank",
+        "Frontend Mentor"
+      ),
+      "Coded by",
+      a(href := "#", "Your Name Here")
+    )
+
   }
 }
