@@ -22,7 +22,7 @@ object Main {
       className := "h-full w-screen h-screen flex flex-row items-center justify-center ",
       div(
         className := "flex flex-col items-center h-screen",
-        className := "lg:flex-row lg:h-[750px] lg:w-[1080px] lg:place-self-center lg:shadow-custom rounded-[40px]  ",
+        className := "lg:flex-row lg:h-[500px] lg:w-[720px] lg:place-self-center lg:shadow-custom rounded-[40px]  ",
         renderTotal(totalScore),
         renderSummary(results)
       )
@@ -31,22 +31,22 @@ object Main {
 
   def renderTotal(totalScore: Int) = {
     div(
-      className := "flex flex-col items-center w-full rounded-b-[40px] h-2/5 ",
-      className := "lg:rounded-[40px] lg:h-full lg:w-1/2 lg:justify-center ",
+      className := "flex flex-col items-center w-full rounded-b-[30px] h-2/5 ",
+      className := "lg:rounded-[30px] lg:h-full lg:w-1/2 lg:justify-center ",
       className := "bg-gradient-to-b from-[#7643FF] to-[#2E2CE9]",
       p(
         "Your Result",
-        className := "text-[#D4CAFF] text-lg font-semibold p-5 ",
-        className := "lg:text-4xl lg:pb-14"
+        className := "text-[#D4CAFF] text-lg font-semibold pt-10 pb-4 ",
+        className := "lg:text-2xl lg:pb-6 "
       ),
       div(
         className := "rounded-full bg-blue-900 h-36 w-36 flex flex-col justify-center items-center py-10",
-        className := "lg:h-[300px] lg:w-[300px] lg:p-1",
+        className := "lg:h-[200px] lg:w-[200px] lg:py-14",
         className := "bg-gradient-to-b from-[#4A23CC] to-[#4734f0]",
         p(
           s"$totalScore",
           className := "text-6xl font-extrabold text-white ",
-          className := "lg:text-8xl"
+          className := "lg:text-7xl lg:pb-3 "
         ),
         p("of 100",
           className := "text-base font-bold text-[#8a80ff] block px-10",
@@ -57,12 +57,12 @@ object Main {
         className := "flex flex-col items-center",
         p("Great",
           className := "text-white text-2xl font-bold pt-5 pb-2",
-          className := "lg:text-5xl lg:p-8"
+          className := "lg:text-3xl lg:p-4"
         ),
         p(
           "You scored higher than 65% of the people who have taken these tests.",
           className := "text-[#B4B6FF] text-base font-semibold text-center pb-16 px-16 ",
-          className := "lg:px-20 lg:text-[28px] lg:font-normal"
+          className := "lg:px-14 lg:text-lg lg:font-normal"
         )
       )
     )
@@ -70,16 +70,17 @@ object Main {
 
   def renderSummary(results: List[CategoryResult]) = {
     div(
-      className := "flex flex-col w-full px-7 lg:px-14",
-      className := " lg:w-1/2 lg:h-full lg:rounded-r-[40px] lg:relative",
-      p("Summary", className := "font-bold text-xl py-6 lg:pt-12 lg:text-4xl"),
+      className := "flex flex-col w-full px-7 ",
+      className := "lg:w-1/2 lg:h-full lg:rounded-r-[40px] lg:relative lg:px-10 ",
+      p("Summary", className := "font-bold text-xl py-6 lg:pt-10 lg:text-2xl"),
       results.map(renderCategoryScore(_)),
       div(
         className := "py-4 w-full h-full",
-        className := "lg:pt-14",
+        className := "lg:pt-8",
         button(
           "Continue",
-          className := "text-white text-2xl font-bold bg-[#303B59] h-20 w-full rounded-full",
+          className := "text-white text-xl font-bold bg-[#303B59] h-16 w-full rounded-full",
+          className := "lg:h-12",
           className := "active:bg-[#4535F0] duration-75"
         )
       )
@@ -92,25 +93,25 @@ object Main {
     val svgIcon = svgRaw
       .map(str =>
         foreignSvgElement(DomApi.unsafeParseSvgString(str))
-          .amend(svg.className := "justify-self-center w-6 h-6")
+          .amend(svg.className := "justify-self-center w-6 h-6 lg:w-5 lg:h-5")
       )
       .startWith(loadingDiv)
 
     div(
-      className := "py-2 w-full",
+      className := " py-2 w-full", // TODO for some reason no white space between categories without this
       div(
-        className := "grid grid-cols-7 w-full h-14 rounded-xl items-center ",
+        className := "grid grid-cols-7 w-full h-16 rounded-xl items-center ", // TODO for some reason justify-items-center doesn't work
         styleAttr := s"--custom-bg: ${result.bgColor}; --custom-highlight: ${result.highlightColor}",
         className := "bg-[--custom-bg]",
-        className := "lg:rounded-2xl",
+        className := "lg:rounded-lg lg:h-14",
         child <-- svgIcon,
         p(
-          className := "col-span-4 text-lg text-[--custom-highlight] font-bold ",
+          className := "col-span-4 text-lg text-[--custom-highlight] font-bold lg:text-base lg:text-bold",
           result.name
         ),
         div(
-          className := "col-span-2 justify-self-center text-lg flex flex-row lg:pr-6",
-          p(s"${result.score}", className := "font-semibold pr-2 "),
+          className := "col-span-2 justify-self-center text-lg flex flex-row lg:pr-4 lg:text-base",
+          p(s"${result.score}", className := "font-semibold pr-1 "),
           p(" / 100", className := "text-gray-400 font-semibold")
         )
       )
