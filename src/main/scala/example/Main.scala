@@ -3,6 +3,10 @@ package example
 import org.scalajs.dom
 import com.raquo.laminar.api.L.{*, given}
 import Data.CategoryResult
+import com.raquo.airstream.web.AjaxStream
+import com.raquo.laminar.DomApi
+import io.laminext.fetch._
+import concurrent.ExecutionContext.Implicits.global
 
 @main
 def resultsSummaryComponent(): Unit =
@@ -43,7 +47,7 @@ object Main {
         p("Summary", className := "font-bold text-2xl py-8"),
         results.map(renderCategoryScore(_)),
         div(
-          className := "py-4 w-full h-full",
+          className := "py-7 w-full h-full",
           button(
             "Continue",
             className := "text-white text-2xl font-bold bg-[#303B59] h-20 w-full rounded-full"
@@ -54,16 +58,30 @@ object Main {
   }
 
   def renderCategoryScore(result: CategoryResult): Element = {
+
+    val svgRaw = Fetch.get(result.iconPath).text.map(_.data)
+    def loadingDiv = div(className := "lds-dual-ring")
+    val svgIcon = svgRaw
+      .map(str =>
+        foreignSvgElement(DomApi.unsafeParseSvgString(str))
+          .amend(svg.className := "justify-self-center w-8 h-8")
+      )
+      .startWith(loadingDiv)
+
     div(
-      className := "py-2 w-full",
+      className := "py-3 w-full",
       div(
         className := "grid grid-cols-7 w-full h-20 rounded-xl items-center ",
-        className := result.backgroundColorClass,
-        p(className := "justify-self-center text-2xl", "ICON"),
-        p(className := "col-span-4 text-2xl", result.name),
+        styleAttr := s"--custom-bg: ${result.bgColor}; --custom-highlight: ${result.highlightColor}",
+        className := "bg-[--custom-bg]",
+        child <-- svgIcon,
+        p(
+          className := "col-span-4 text-2xl text-[--custom-highlight] font-bold ",
+          result.name
+        ),
         div(
           className := "col-span-2 justify-self-center text-2xl flex flex-row",
-          p(s"${result.score}", className := "font-bold pr-2"),
+          p(s"${result.score}", className := "font-semibold pr-2 "),
           p(" / 100", className := "text-gray-400 font-semibold")
         )
       )

@@ -16,4 +16,5 @@ lazy val root = project
 
     libraryDependencies += "org.scala-js" %%% "scalajs-dom" % "2.4.0",
     libraryDependencies += "com.raquo" %%% "laminar" % "15.0.1",
+    libraryDependencies += "io.laminext" %%% "fetch" % "0.15.0",
   )
