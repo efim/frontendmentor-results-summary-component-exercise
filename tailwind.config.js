@@ -15,7 +15,10 @@ export default {
         'semibold': 600,
         'bold': 700,
         'extrabold': 900,
-      }
+      },
+      boxShadow: {
+        'custom': '0 25px 60px 2px rgba(69, 130, 255, 0.2)',
+      },
     }
   },
   plugins: [],

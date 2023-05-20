@@ -22,7 +22,7 @@ object Main {
       className := "h-full w-screen h-screen flex flex-row items-center justify-center ",
       div(
         className := "flex flex-col items-center h-screen",
-        className := "lg:flex-row lg:h-[750px] lg:w-[1080px] lg:place-self-center lg:shadow-2xl rounded-[40px]  ",
+        className := "lg:flex-row lg:h-[750px] lg:w-[1080px] lg:place-self-center lg:shadow-custom rounded-[40px]  ",
         renderTotal(totalScore),
         renderSummary(results)
       )
