@@ -34,7 +34,7 @@ object Main {
           p("Great", className := "p-6 text-white text-4xl font-bold"),
           p(
             "You scored higher than 65% of the people who have taken these tests.",
-            className := "text-[#B4B6FF] text-2xl font text-center pb-16 px-32 "
+            className := "text-[#B4B6FF] text-2xl font-semibold text-center pb-16 px-32 "
           )
         )
       ),
@@ -42,18 +42,31 @@ object Main {
         className := "flex flex-col items-start w-full px-10",
         p("Summary", className := "font-bold text-2xl py-8"),
         results.map(renderCategoryScore(_)),
-        button("Continue", className := "text-white bg-blue-900 h-16 w-full rounded-full p-4")
-
-      ),
+        div(
+          className := "py-4 w-full h-full",
+          button(
+            "Continue",
+            className := "text-white text-2xl font-bold bg-[#303B59] h-20 w-full rounded-full"
+          )
+        )
+      )
     )
   }
 
   def renderCategoryScore(result: CategoryResult): Element = {
     div(
-      className := "px-10 flex flex-row w-full py-4",
-      className := result.backgroundColorClass,
-      p(result.name),
-      p(s"${result.score} / 100")
+      className := "py-2 w-full",
+      div(
+        className := "grid grid-cols-7 w-full h-20 rounded-xl items-center ",
+        className := result.backgroundColorClass,
+        p(className := "justify-self-center text-2xl", "ICON"),
+        p(className := "col-span-4 text-2xl", result.name),
+        div(
+          className := "col-span-2 justify-self-center text-2xl flex flex-row",
+          p(s"${result.score}", className := "font-bold pr-2"),
+          p(" / 100", className := "text-gray-400 font-semibold")
+        )
+      )
     )
   }
 }
